@@ -1,0 +1,21 @@
+registry:
+  image: registry:2
+  restart: always
+  ports:
+    - 5002:5000
+    - 5003:5001
+  environment:
+#    REGISTRY_HTTP_TLS_CERTIFICATE: /certs/emc.crt
+#    REGISTRY_HTTP_TLS_KEY: /certs/emc.key
+    REGISTRY_STORAGE_FILESYSTEM_ROOTDIRECTORY: /var/lib/registry
+  volumes:
+    - ./images:/var/lib/registry
+  # - ./emc_cer:/certs
+
+dockerui:
+  image: dockerui/dockerui
+  privileged: true
+  ports:
+    - 9000:9000
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock

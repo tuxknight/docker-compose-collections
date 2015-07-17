@@ -1,0 +1,25 @@
+#rethinkdbvolume:
+#  image: 10.32.105.134:5000/shipyard/rethinkdb
+#  volumes:
+#    - ./rethinkdb-data:/data
+#  entrypoint:
+#    - /bin/bash
+
+rethinkdb:
+  image: 10.32.105.134:5000/shipyard/rethinkdb
+#  volumes_from:
+#    - rethinkdbvolume
+  volumes:
+    - ./rethinkdb-data:/data
+  expose:
+    - 29015
+    - 28015
+    - 8080
+
+#shipyard:
+#  image: 10.32.105.134:5000/shipyard/shipyard
+#  ports:
+#    - 8080:8080 
+#  links:
+#    - rethinkdb:rethink
+#  command: -rethinkdb-addr="rethink:28015"

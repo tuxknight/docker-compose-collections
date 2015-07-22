@@ -1,9 +1,9 @@
 registry:
-  image: registry:2
+  image: 10.32.105.134:5000/registry:2
   restart: always
   ports:
-    - 5002:5000
-    - 5003:5001
+    - 5000:5000
+    - 5001:5001
   environment:
 #    REGISTRY_HTTP_TLS_CERTIFICATE: /certs/emc.crt
 #    REGISTRY_HTTP_TLS_KEY: /certs/emc.key
@@ -12,10 +12,12 @@ registry:
     - ./images:/var/lib/registry
   # - ./emc_cer:/certs
 
-dockerui:
-  image: dockerui/dockerui
-  privileged: true
+registryui:
+  image: 10.32.105.134:5000/docker-registry-ui
+  restart: always
   ports:
-    - 9000:9000
+    - 8099:8080
+  environment:
+    REG1: "http://10.32.105.153:5000/v1/"
   volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
+    - ./registry-ui_data:/var/lib/h2

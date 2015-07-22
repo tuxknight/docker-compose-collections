@@ -2,3 +2,5 @@ dockerui:
   image: 10.32.105.134:5000/dockerui
   ports:
     - 9000:9000
+  privileged: true
+  command: "-e http://10.32.105.153:2376"
